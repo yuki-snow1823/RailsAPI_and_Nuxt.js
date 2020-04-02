@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div v-if="user">
+    <p>{{user.name}}</p>
     <AddTodo @submit="addTodo" />
     <TodoList :todos="todos" />
-    <!-- さらに何を入れるか定義 -->
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
     AddTodo,
     TodoList
   },
+  computed: {
+    user() {
+      return this.$store.state.currentUser;
+    }
+  },
   data() {
     return {
       todos: []
@@ -23,7 +28,6 @@ export default {
   methods: {
     addTodo(title) {
       this.todos.push({
-        // こっちではこう動く。ように定義 todosにtitle入れるってことだと思う
         title
       });
     }
