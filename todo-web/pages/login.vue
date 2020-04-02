@@ -32,11 +32,19 @@ export default {
     };
   },
   methods: {
-    login() {
+login() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          this.$store.commit("setNotice", {
+            status: true,
+            message: "ログインしました"
+            // ここでサクセスメッセージの表示
+          });
+          setTimeout(() => {
+            this.$store.commit("setNotice",{});
+          }, 2000); //2秒後に隠す
           this.$router.push("/");
         })
         .catch(error => {

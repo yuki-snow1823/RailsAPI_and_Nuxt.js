@@ -10,7 +10,19 @@
 import AddTodo from "@/components/AddTodo";
 import TodoList from "@/components/TodoList";
 import axios from "@/plugins/axios";
+
 export default {
+  fetch({ store, redirect }) {
+    store.watch(
+      state => state.currentUser,
+      (newUser, oldUser) => {
+        if (!newUser) {
+          return redirect("/login");
+        }
+      }
+    );
+  },
+  // 多分ここ
   components: {
     AddTodo,
     TodoList
@@ -32,6 +44,7 @@ export default {
     }
   }
 };
+
 </script>
 
 <style>
