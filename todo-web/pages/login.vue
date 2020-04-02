@@ -31,35 +31,12 @@ export default {
       error: ""
     };
   },
-  methods: {
-login() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          this.$store.commit("setNotice", {
-            status: true,
-            message: "ログインしました"
-            // ここでサクセスメッセージの表示
-          });
-          setTimeout(() => {
-            this.$store.commit("setNotice",{});
-          }, 2000); //2秒後に隠す
-          this.$router.push("/");
-        })
-        .catch(error => {
-          console.log(error);
-          this.error = (code => {
-            switch (code) {
-              case "auth/user-not-found":
-                return "メールアドレスが間違っています";
-              case "auth/wrong-password":
-                return "※パスワードが正しくありません";
-              default:
-                return "※メールアドレスとパスワードをご確認ください";
-            }
-          })(error.code);
-        });
+ methods: {
+    login() {
+      this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password
+      });
     }
   }
 };
