@@ -26,10 +26,13 @@ export default {
   },
  methods: {
     handleSubmit() {
-      this.$emit("submit", this.title);  //この行を追加
-      // ボタン押した時にこれが発火し、importが書いてあるタイトルが飛んでいく
+      const todo = {
+        title: this.title,
+        user_id: this.user.id,
+      };
+      this.$emit("submit", todo); 
+      // タイトルだけではなく
       this.title = "";
-      // それで、入れた場所を白紙に戻している多分→あってる
     }
   }
 };
