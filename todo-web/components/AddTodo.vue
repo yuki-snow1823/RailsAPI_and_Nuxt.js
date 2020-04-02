@@ -24,14 +24,13 @@ export default {
       // v-modelと紐づいているからここも書き変わる
     };
   },
- methods: {
+  methods: {
     handleSubmit() {
       const todo = {
         title: this.title,
-        user_id: this.user.id,
+        user_id: this.$store.state.currentUser.id
       };
-      this.$emit("submit", todo); 
-      // タイトルだけではなく
+      this.$emit("submit", todo);
       this.title = "";
     }
   }

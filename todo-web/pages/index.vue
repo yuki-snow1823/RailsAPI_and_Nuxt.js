@@ -1,6 +1,7 @@
 <template>
   <div v-if="user">
     <p>{{user.name}}</p>
+    <p>{{user.id}}</p>
     <AddTodo @submit="addTodo" />
     <TodoList :todos="user.todos" /> //修正
   </div>
